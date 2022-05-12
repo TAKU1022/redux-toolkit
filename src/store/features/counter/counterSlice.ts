@@ -1,5 +1,4 @@
 import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { RootState, AppThunk } from '../..';
 
 export interface CounterState {
   value: number;
@@ -12,7 +11,7 @@ const initialState: CounterState = {
 };
 
 export const incrementAsync = createAsyncThunk(
-  'counter/fetchCount',
+  'counter/incrementAsync',
   async (amount: number) => {
     const fetchCount = (amount = 1) => {
       return new Promise<{ data: number }>((resolve) =>
@@ -39,6 +38,11 @@ export const counterSlice = createSlice({
     incrementByAmount: (state, action: PayloadAction<number>) => {
       state.value += action.payload;
     },
+    incrementIfOdd: (state, action: PayloadAction<number>) => {
+      if (state.value % 2 === 1) {
+        state.value += action.payload;
+      }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -55,17 +59,7 @@ export const counterSlice = createSlice({
   },
 });
 
-export const { increment, decrement, incrementByAmount } = counterSlice.actions;
-
-export const selectCount = (state: RootState) => state.counter.value;
-
-export const incrementIfOdd =
-  (amount: number): AppThunk =>
-  (dispatch, getState) => {
-    const currentValue = selectCount(getState());
-    if (currentValue % 2 === 1) {
-      dispatch(incrementByAmount(amount));
-    }
-  };
+export const { increment, decrement, incrementByAmount, incrementIfOdd } =
+  counterSlice.actions;
 
 export default counterSlice.reducer;

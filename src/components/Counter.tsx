@@ -1,18 +1,16 @@
 import React, { useState } from 'react';
-import { useAppDispatch, useAppSelector } from '../store';
-import {
-  decrement,
-  increment,
-  incrementByAmount,
-  incrementAsync,
-  incrementIfOdd,
-  selectCount,
-} from '../store/features/counter/counterSlice';
+import { useCounter } from '../hooks/useCounter';
 import styles from '../styles/Counter.module.css';
 
 export function Counter() {
-  const count = useAppSelector(selectCount);
-  const dispatch = useAppDispatch();
+  const {
+    counter,
+    increase,
+    decrease,
+    increaseByAmount,
+    increaseAsync,
+    increaseIfOdd,
+  } = useCounter();
   const [incrementAmount, setIncrementAmount] = useState('2');
 
   const incrementValue = Number(incrementAmount) || 0;
@@ -23,15 +21,15 @@ export function Counter() {
         <button
           className={styles.button}
           aria-label="Decrement value"
-          onClick={() => dispatch(decrement())}
+          onClick={() => decrease()}
         >
           -
         </button>
-        <span className={styles.value}>{count}</span>
+        <span className={styles.value}>{counter.value}</span>
         <button
           className={styles.button}
           aria-label="Increment value"
-          onClick={() => dispatch(increment())}
+          onClick={() => increase()}
         >
           +
         </button>
@@ -45,19 +43,19 @@ export function Counter() {
         />
         <button
           className={styles.button}
-          onClick={() => dispatch(incrementByAmount(incrementValue))}
+          onClick={() => increaseByAmount(incrementValue)}
         >
           Add Amount
         </button>
         <button
           className={styles.asyncButton}
-          onClick={() => dispatch(incrementAsync(incrementValue))}
+          onClick={() => increaseAsync(incrementValue)}
         >
           Add Async
         </button>
         <button
           className={styles.button}
-          onClick={() => dispatch(incrementIfOdd(incrementValue))}
+          onClick={() => increaseIfOdd(incrementValue)}
         >
           Add If Odd
         </button>
