@@ -1,4 +1,4 @@
-import { AppThunk, RootState, useAppDispatch, useAppSelector } from '../store';
+import { RootState, useAppDispatch, useAppSelector } from '../store';
 import {
   decrement,
   increment,
