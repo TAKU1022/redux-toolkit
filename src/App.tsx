@@ -2,8 +2,9 @@ import React from 'react';
 import logo from './logo.svg';
 import { Counter } from './components/Counter';
 import './styles/App.css';
+import { DummyArea } from './components/DummyArea';
 
-function App() {
+export const App: React.FC = () => {
   return (
     <div className="App">
       <header className="App-header">
@@ -51,8 +52,10 @@ function App() {
           </a>
         </span>
       </header>
+
+      <main>
+        <DummyArea />
+      </main>
     </div>
   );
-}
-
-export default App;
+};
