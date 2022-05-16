@@ -13,7 +13,14 @@ export const DummyDetail: React.FC = () => {
   return (
     <div className={styles.wrapper}>
       {item.photos.map((photo) => (
-        <div key={photo.id} className={styles.card}></div>
+        <div
+          key={photo.id}
+          onClick={() => changeSelectedPhoto(photo)}
+          style={
+            photo === selectedPhoto ? { border: '1px solid red' } : undefined
+          }
+          className={styles.card}
+        ></div>
       ))}
     </div>
   );
