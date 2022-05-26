@@ -6,21 +6,22 @@ export const ImageList: React.FC = () => {
     [...Array(24)].map(() => 'https://dummyimage.com/400x400.jpg')
   );
 
-  const onDragStart = (event: React.DragEvent<HTMLImageElement>) => {
-    const target = event.currentTarget;
-    event.dataTransfer.setData('text/uri-list', target.src);
+  const onDragStart = (event: React.DragEvent<HTMLDivElement>) => {
+    const target = event.currentTarget.firstElementChild;
+    const imageUrl = target?.getAttribute('src');
+    event.dataTransfer.setData('text/plain', imageUrl as string);
   };
 
   return (
     <div className={style.grid}>
       {imageList.map((url: string, index: number) => (
-        <div key={index} className={style.imageBox}>
-          <img
-            className={style.image}
-            src={url}
-            alt=""
-            onDragStart={onDragStart}
-          />
+        <div
+          className={style.imageBox}
+          key={index}
+          draggable={true}
+          onDragStart={onDragStart}
+        >
+          <img className={style.image} src={url} alt="" draggable={false} />
         </div>
       ))}
     </div>
