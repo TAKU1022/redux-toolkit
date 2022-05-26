@@ -7,18 +7,11 @@ import { PhotoState } from '../store/features/item/itemSlice';
 
 export const DummyArea: React.FC = () => {
   const { item } = useItem();
-  const [selectedPhoto, changeSelectedPhoto] = useState<PhotoState>(
-    item.photos[0]
-  );
-
-  const onClickPhoto = (photo: PhotoState) => {
-    changeSelectedPhoto(photo);
-  };
 
   return (
     <div className={styles.wrapper}>
-      <DummyDetail selectedPhoto={selectedPhoto} onClickPhoto={onClickPhoto} />
-      <ImageList selectedPhoto={selectedPhoto} />
+      <DummyDetail />
+      <ImageList />
     </div>
   );
 };
