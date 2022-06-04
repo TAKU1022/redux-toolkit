@@ -3,6 +3,7 @@ import logo from './logo.svg';
 import { Counter } from './components/Counter';
 import './styles/App.css';
 import { DummyArea } from './components/DummyArea';
+import { Practice } from './components/Practice';
 
 export const App: React.FC = () => {
   return (
@@ -55,6 +56,7 @@ export const App: React.FC = () => {
 
       <main>
         <DummyArea />
+        <Practice />
       </main>
     </div>
   );

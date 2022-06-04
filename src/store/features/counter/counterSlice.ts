@@ -2,11 +2,23 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 export interface CounterState {
   value: number;
+  id: string;
+  nest: {
+    demo: {
+      passions: string[];
+    };
+  };
   status: 'idle' | 'loading' | 'failed';
 }
 
 const initialState: CounterState = {
   value: 0,
+  id: 'aaa',
+  nest: {
+    demo: {
+      passions: [],
+    },
+  },
   status: 'idle',
 };
 
@@ -43,6 +55,12 @@ export const counterSlice = createSlice({
         state.value += action.payload;
       }
     },
+    addPassion: (state, action: PayloadAction<string>) => {
+      state.nest.demo.passions.push(action.payload);
+    },
+    updatePassion: (state, action: PayloadAction<number>) => {
+      state.nest.demo.passions[action.payload] = 'ぴえん';
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -59,7 +77,13 @@ export const counterSlice = createSlice({
   },
 });
 
-export const { increment, decrement, incrementByAmount, incrementIfOdd } =
-  counterSlice.actions;
+export const {
+  increment,
+  decrement,
+  incrementByAmount,
+  incrementIfOdd,
+  addPassion,
+  updatePassion,
+} = counterSlice.actions;
 
 export default counterSlice.reducer;

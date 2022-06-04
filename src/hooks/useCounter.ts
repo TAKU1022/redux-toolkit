@@ -1,10 +1,12 @@
 import { RootState, useAppDispatch, useAppSelector } from '../store';
 import {
+  addPassion,
   decrement,
   increment,
   incrementAsync,
   incrementByAmount,
   incrementIfOdd,
+  updatePassion,
 } from '../store/features/counter/counterSlice';
 
 export const useCounter = () => {
@@ -22,12 +24,19 @@ export const useCounter = () => {
 
   const increaseIfOdd = (amount: number) => dispatch(incrementIfOdd(amount));
 
+  const onAddPassion = (message: string) => dispatch(addPassion(message));
+
+  const onUpdatePassion = (index: number) => dispatch(updatePassion(index));
+
   return {
     counter,
+    id: counter.id,
     increase,
     decrease,
     increaseByAmount,
     increaseAsync,
     increaseIfOdd,
+    onAddPassion,
+    onUpdatePassion,
   };
 };
